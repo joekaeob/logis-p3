@@ -1,0 +1,111 @@
+<header>
+</header>    
+
+<div>
+    <div class="container custom-top">
+        <div class="page-title">ระบบการจัดการทรัพยากร</div>
+        
+        <div ng-show="showConfigMenu == false">
+            <a ng-click="setConfigMenu(true)">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+                จัดการทรัพยากรอื่นๆ
+            </a>
+        </div>
+        
+        <div class="row" ng-show="showConfigMenu == true">
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2  custom-bg-color1" 
+                        href="/#/assets-config/contract"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>เลขสัญญา</h3>
+                        <h4>(Contract)</h4>
+                        <p>เอกสารสำหรับเก็บหมายเลขสัญญา(เลขสัญญานี้จะถูกนำไปอ้างอิงและนำไปใช้ใน ยอดสุทธิ)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2 custom-bg-color2"
+                        href="/#/assets-config/vendor"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>ผู้ขาย</h3>
+                        <h4>(Vendor)</h4>
+                        <p>เอกสารสำหรับเก็บข้อมูลผู้ค้าต่างๆที่นำของมาส่งให้ยังคลังสินค้า (โดยข้อมูลนี้จะปรากฏในเอกสารยอดสุทธิ)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2 custom-bg-color3"
+                        href="/#/assets-config/item"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>ส.ป.</h3>
+                        <h4>(Item)</h4>
+                        <p>เอกสารสำคัญที่จะทำการบันทึกข้อมูลเกี่ยวกับ ส.ป. รวมถึงข้อมุลที่เกี่ยวข้องและรายละเอียดทั้งหมดไว้</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2 custom-bg-color4"
+                        href="/#/assets-config/department"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>หน่วย</h3>
+                        <h4>(Department)</h4>
+                        <p>เอกสารเก็บข้อมูลของผู้ปฏิบัติการ รวมถึงข้อมุลของหน่วยต่างๆที่เข้ามาทำการเบิก ส.ป. จากคลังสินค้าด้วย</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2 custom-bg-color5"
+                        href="/#/assets-config/warehouse"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>คลังสินค้า</h3>
+                        <h4>(Warehouse)</h4>
+                        <p>เอกสารสำหรับเก็บข้อมูลของแต่ละคลัง (ตัวอย่างเช่น ลพบุรี, ปราณบุุรี, ราชบุรี) โดยข้อมูลนี้จะถูกใช้ในเอกสาร ยอด ุทธิ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="thumbnail text-center">
+                    <a class="btn btn-circle btn-xl custom-top2 custom-bg-color6"
+                        href="/#/assets-config/zone"
+                        ng-click="setConfigMenu(false)">
+                        <i class="fa fa-cube xl-font-size" aria-hidden="true"></i> 
+                    </a>    
+                    <div class="caption">
+                        <h3>พื้นที่ภายในคลัง</h3>
+                        <h4>(Zone)</h4>
+                        <p>เอกสารสำหรับเก็บข้อมูลของลักษณะพื้นที่ของคลังแต่ละแห่ง โดยเอกสารตัวนี้จะบันทึกข้อมูลโครงสร้างพื้นฐานของทุกคลังไว้</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div ng-show="showConfigMenu == false" ui-view=""></div>
+        
+    </div>   
+</div>    

@@ -1,0 +1,91 @@
+/* CSS declarations go here */
+.custom-top{
+    margin-top:80px;
+}
+
+.custom-top2{
+    margin-top:20px;
+}
+
+.custom-height{
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.custom-height2{
+    height: 350px;
+}
+
+.custom-bg-color1{
+    background-color: #FA5858;
+    color: #ffffff;
+}
+
+.custom-bg-color2{
+    background-color: #F7D358;
+    color: #ffffff;
+}
+
+.custom-bg-color3{
+    background-color: #00FF00;
+    color: #ffffff;
+}
+
+.custom-bg-color4{
+    background-color: #00BFFF;
+    color: #ffffff;
+}
+
+.custom-bg-color5{
+    background-color: #8000FF;
+    color: #ffffff;
+}
+
+.custom-bg-color6{
+    background-color: #FE2EF7;
+    color: #ffffff;
+}
+
+.custom-list-group-item{
+    margin-top:7px;  
+}
+
+.custom-list-group-item:hover { 
+    background-color: #D8D8D8;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.xl-font-size{
+    font-size: 1.8em;
+}
+
+.page-title{
+    font-size: 1.3em;
+    color: #A4A4A4;
+    margin-bottom: 20px;
+}

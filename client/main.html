@@ -1,0 +1,29 @@
+<head>
+  <title>Logistic</title>
+  <link rel="icon" sizes="16x16 32x32" href="./res/images/favicon.ico">
+</head>
+ 
+<body ng-app="main-module">
+  <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span> 
+        </button>
+        <a class="navbar-brand" href="#">ระบบคลังสินค้า</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar" style="padding-right:10px;">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/#/assets-config"><i class="fa fa-cube" aria-hidden="true"></i> ทรัพยากร</a></li>
+          <li><a href="/#/regis-item"><i class="fa fa-registered" aria-hidden="true"></i> ลงทะเบียน</a></li>
+          <li><a href="/#/gate-in"><i class="fa fa-sign-in" aria-hidden="true"></i> นำเข้า</a></li>
+          <li><a href="/#/order-item"><i class="fa fa-table" aria-hidden="true"></i> เบิกสินค้า</a></li>
+          <li><a href="/#/gate-out"><i class="fa fa-sign-out" aria-hidden="true"> นำออก</a></li>
+        </ul>  
+      </div>  
+    </nav>
+  </header>       
+  <div ui-view=""></div>
+</body> 

@@ -1,0 +1,91 @@
+<header>
+</header>    
+
+<div class="custom-top2">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> ค้นหา/แก้ไข พิ้นที่ภายในคลัง
+                    </h3>
+                </div>
+                <div class="panel-body custom-height">
+
+                    <div class="list-group text-left">
+                        <div ng-repeat="zone in $ctrl.zones" class="col-md-12 list-group-item custom-list-group-item">
+                            <div class="col-md-6 text-left">
+                                <h4><b>ชื่อพื้นที่ :</b> {{zone.name}}</h4>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                 <button class="btn btn-danger" ng-click="$ctrl.removeZone(zone.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </div>   
+                            <div class="col-md-12"> 
+                                <b>หมายเลขคลังสินค้า:</b> {{zone.warehouseId}}
+                            </div>
+                
+                            <div class="col-md-12">     
+                                <b>รายละเอียด:</b> {{zone.description}}
+                            </div>
+
+                            <div class="col-md-12">     
+                                <b>ความจุทั้งหมด:</b> {{zone.maxCapacity}}
+                            </div>
+
+                            <div class="col-md-12">     
+                                <b>ความจุที่เหลือ:</b> {{zone.remainCapacity}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> เพิ่ม พิ้นที่ภายในคลัง
+                    </h3>
+                </div>
+                <div class="panel-body custom-height">
+                    
+                    <form name="newZoneForm" class="form-horizontal text-center" ng-submit="$ctrl.addZone($ctrl.newZone)">
+
+                        <label class="control-label col-md-3" for="name">ชื่อ พื้นที่ :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newZone.name" type="text" id="name" placeholder="เช่น" required/></p>
+                        </div>
+                        
+                        <label class="control-label col-md-3" for="warehouseId">คลังสินค้า :</label>
+                        <div class="col-md-9">
+                            <p>
+                                <select class="form-control" id="warehouseId" ng-model="$ctrl.newZone.warehouseId"required>
+                                    <option ng-repeat="warehouse in $ctrl.warehouses" value="{{warehouse.id}}">{{warehouse.name}}</option>
+                                </select>
+                            </p>
+                        </div>
+
+                        <label class="control-label col-md-3" for="description">รายละเอียด :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newZone.description" type="text" id="description" placeholder=""/></p>
+                        </div>
+                        
+                        <label class="control-label col-md-3" for="description">ความจุของพื้นที่ :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newZone.maxCapacity" type="text" id="description" placeholder=""/></p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <p><input type="submit" ng-disabled="newZoneForm.$invalid" class="btn btn-primary" value="บันทึก"></p>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>  
+    </div>            
+</div>    

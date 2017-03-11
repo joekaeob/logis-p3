@@ -1,0 +1,54 @@
+<header>
+</header>    
+
+<div>
+    <div class="container custom-top">
+        <div class="page-title">ระบบการเบิก ส.ป.</div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนแล้ว
+                        </h3>
+                    </div>
+                    <div class="panel-body custom-height">
+                        <div ng-repeat="maindoc in $ctrl.maindocs" class="col-md-12 list-group-item custom-list-group-item">
+                            <div class="row" ng-if="rundId != maindoc.id">
+                                <div class="col-md-6 text-left">
+                                    <h4><b>หมายเลข ส.ป. :</b> {{maindoc.itemNo}}</h4> {{runId}}
+                                </div>
+                                <div class="col-md-6 text-right" ng-init="flag[$index] = false">
+                                    <button class="btn btn-warning" ng-click="flag[$index] = !flag[$index]"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>   
+                            </div>
+                            <div class="row">    
+                                <div class="col-md-4 text-left"> 
+                                    <b>หมายเลขคลังสินค้า:</b> {{maindoc.warhouseNo}}
+                                </div>
+                                <div class="col-md-8">  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"> 
+                                    <ul>
+                                        <p ng-repeat="(key, value) in maindoc.rfid">รหัส RFID: {{key}} | สถานะ: {{value}}</p>
+                                    </ul>    
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row" ng-if="flag[$index] === true">
+                                        <div class="col-md-6 text-right"><label class="control-label" for="order">จำนวนที่เบิก :</label></div>
+                                        <div class="col-md-3 text-center"><input class="form-control" id="order" name="order" type="number" ng-model="$ctrl.orderNumber" required/></div>
+                                        <div class="col-md-3 text-left"><input type="submit" ng-click="$ctrl.addMaindoc($ctrl.orderNumber, maindoc)" class="btn btn-primary" value="บันทึก"></div>
+                                    </div> 
+                                </div>    
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

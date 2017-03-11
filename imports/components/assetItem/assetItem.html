@@ -1,0 +1,81 @@
+<header>
+</header>    
+
+<div class="custom-top2">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> ค้นหา/แก้ไข ข้อมูล ส.ป.
+                    </h3>
+                </div>
+                <div class="panel-body custom-height">
+                    
+                    <div class="list-group text-left">
+                        <div ng-repeat="item in $ctrl.items" class="col-md-12 list-group-item custom-list-group-item">
+                            <div class="col-md-6 text-left">
+                                <h4><b>ส.ป. :</b> {{item.name}}</h4>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                 <button class="btn btn-danger" ng-click="$ctrl.removeItem(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </div>   
+                            <div class="col-md-12"> 
+                                <b>หมายเลข:</b> {{item.number}}
+                            </div>
+                            <div class="col-md-12">     
+                                <b>ราคา:</b> {{item.price}}
+                            </div>
+                            <div class="col-md-12">     
+                                <b>รายละเอียด:</b> {{item.description}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>  
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> เพิ่ม ข้อมูล ส.ป.
+                    </h3>
+                </div>
+                <div class="panel-body custom-height2">
+                     
+                     <form name="newItemForm" class="form-horizontal text-center" ng-submit="$ctrl.addItem($ctrl.newItem)">
+
+                        <label class="control-label col-md-3" for="name">ชื่อ ส.ป. :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newItem.name" type="text" id="name" placeholder="เช่น UM-01" required/></p>
+                        </div>
+
+                        <label class="control-label col-md-3" for="number">หมายเลข ส.ป. :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newItem.number" type="text" id="number" placeholder="เช่น 6135-XX-134-1267" required/></p>
+                        </div>
+
+                        <label class="control-label col-md-3" for="price">ราคา :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newItem.price" type="text" id="price" placeholder="เช่น 26 (บาท)" required/></p>
+                        </div>
+                        
+                        <label class="control-label col-md-3" for="description">รายละเอียด :</label>
+                        <div class="col-md-9">
+                            <p><input class="form-control" ng-model="$ctrl.newItem.description" type="text" id="description" placeholder="เช่น SB-22/PT,TA-312/PT,TS-352/U,เครื่องตรวจท่นระเบิด  ( สป.เข้ามาปี 56 )" required/></p>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <p><input type="submit" ng-disabled="newItemForm.$invalid" class="btn btn-primary" value="บันทึก"></p>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>            
+</div>    
