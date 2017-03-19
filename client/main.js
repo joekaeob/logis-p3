@@ -10,6 +10,7 @@ import assetItem from '../imports/components/assetItem/assetItem';
 import assetDepartment from '../imports/components/assetDepartment/assetDepartment';
 import assetWarehouse from '../imports/components/assetWarehouse/assetWarehouse';
 import assetZone from '../imports/components/assetZone/assetZone';
+import assetLookup from '../imports/components/assetLookup/assetLookup';
 
 import regisComponent from '../imports/components/regisComponent/regisComponent';
 import gateIn from '../imports/components/gateIn/gateIn';
@@ -31,7 +32,8 @@ angular.module('main-module', [
   regisComponent.name,
   gateIn.name,
   orderComponent.name,
-  gateOut.name
+  gateOut.name,
+  assetLookup.name
 ])
 
 .config(['$stateProvider', '$urlRouterProvider',
@@ -95,6 +97,11 @@ angular.module('main-module', [
             .state('gate-out', {
                 url: "/gate-out",
                 template:'<gate-out></gate-out>'
+            })
+            
+            .state('asset-lookup', {
+                url: "/asset-lookup",
+                template:'<asset-lookup></asset-lookup>'
             });
     }
 ]);

@@ -47,7 +47,7 @@ class GateIntCtrl {
                     }
                 );
 
-                var rfidList2 = Rfidlist.find({rfid:{$in:rfidNumbers}});
+                //var rfidList2 = Rfidlist.find({rfid:{$in:rfidNumbers}});
                 
                 console.log("------Maindoc 1------");
                 console.log(rfidNumbers);
@@ -65,8 +65,6 @@ class GateIntCtrl {
                     
                     if(rfidList[r].status === "R"){
                         rfidMatchList.push(rfidList[r]);
-
-                        
 
                         /** Check duplicate record in scope objs */
                         if($scope.maindocsObj[rfidList[r].maindocNo]){
@@ -95,7 +93,6 @@ class GateIntCtrl {
                                         Meteor.call('rfidtmp.remove', Session.get("rfidCount"), function(error, result){
                                             
                                             
-                                    
                                         });
                                     });
                                     

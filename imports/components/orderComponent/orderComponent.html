@@ -15,9 +15,10 @@
                     </div>
                     <div class="panel-body custom-height">
                         <div ng-repeat="maindoc in $ctrl.maindocs" class="col-md-12 list-group-item custom-list-group-item">
-                            <div class="row" ng-if="rundId != maindoc.id">
+                            <div class="row">
                                 <div class="col-md-6 text-left">
-                                    <h4><b>หมายเลข ส.ป. :</b> {{maindoc.itemNo}}</h4> {{runId}}
+                                    <h4><b>หมายเลข ส.ป. :</b> {{maindoc.itemNo}}</h4>
+                                    คงเหลือ: {{maindoc.balanceAmount}} | รับ: {{maindoc.receiveAmount}} | เบิก: {{maindoc.orderAmount}}
                                 </div>
                                 <div class="col-md-6 text-right" ng-init="flag[$index] = false">
                                     <button class="btn btn-warning" ng-click="flag[$index] = !flag[$index]"><i class="fa fa-pencil" aria-hidden="true"></i></button>
