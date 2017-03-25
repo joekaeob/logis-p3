@@ -107,6 +107,15 @@ Meteor.methods({
     },
 
     /* 
+    * Method to remove document from collection. [basic operation]
+    * @param id of document which need to remove from collection
+    */ 
+    'maindocs.removeAll' () {
+        Maindocs.remove({});
+    },
+
+
+    /* 
     * Method to check valid document within collection. [basic operation]
     * @param id of document which need to validate
     */
@@ -124,12 +133,13 @@ Meteor.methods({
      * @param document BSON which need to update collection
      */ 
     'maindocs.updateStatus' (docNo, rfidlist) {
+         console.log(docNo);
          Maindocs.update(
-            { id: docNo },
+            { _id: docNo },
             { $set:
                 { rfid: rfidlist }
             }
         );
-    }              
+    },  
     
 });

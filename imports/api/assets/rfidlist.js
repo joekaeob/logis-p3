@@ -88,12 +88,23 @@ Meteor.methods({
 
      'rfidlist.updateStatusOut' (rfidlist) {
         for(r in rfidlist){
-            Rfidlist.update(
-                {rfid: r},
-                { $set:
-                    {status:"O"} 
-                }
-            );
+            if(rfidlist[r] === "O"){
+                Rfidlist.update(
+                    {rfid: r},
+                    { $set:
+                        {status:"O"} 
+                    }
+                );
+            }
         }
-    }
+    },
+
+    /* 
+    * Method to remove document from collection. [basic operation]
+    * @param id of document which need to remove from collection
+    */ 
+    'rfidlist.removeAll' () {
+        Rfidlist.remove({});
+    },
+
 });    

@@ -18,6 +18,8 @@ import gateIn from '../imports/components/gateIn/gateIn';
 import orderComponent from '../imports/components/orderComponent/orderComponent';
 import gateOut from '../imports/components/gateOut/gateOut';
 
+import systemConfig from '../imports/components/systemConfig/systemConfig';
+
 angular.module('main-module', [
   angularMeteor,
   uiRouter,
@@ -33,7 +35,8 @@ angular.module('main-module', [
   gateIn.name,
   orderComponent.name,
   gateOut.name,
-  assetLookup.name
+  assetLookup.name,
+  systemConfig.name
 ])
 
 .config(['$stateProvider', '$urlRouterProvider',
@@ -102,6 +105,11 @@ angular.module('main-module', [
             .state('asset-lookup', {
                 url: "/asset-lookup",
                 template:'<asset-lookup></asset-lookup>'
+            })
+
+            .state('system-config', {
+                url: "/system-config",
+                template:'<system-config></system-config>'
             });
     }
 ]);

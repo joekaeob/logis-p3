@@ -1,0 +1,64 @@
+<header>
+</header>    
+
+<div>
+    <div class="container custom-top">
+        <div class="page-title">การจัดการระบบ</div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <b>ปรับแต่ง ข้อมูล</b>
+                            </h3>
+                        </div>
+                        <div class="panel-body custom-height">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <button class="btn btn-danger" ng-click="$ctrl.removeMaindocsAll()">ลบเอกสารทั้งหมด</button>   
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="btn btn-danger" ng-click="$ctrl.removeRfidlistAll()">ลบข้อมูล RFID ทั้งหมด</button>    
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="btn btn-danger" ng-click="$ctrl.removeRfidTmpAll()">ลบข้อมูลการนำเข้า</button>   
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="btn btn-danger" ng-click="$ctrl.removeRfidTmpOutAll()">ลบข้อมูลการนำออก</button> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-md-8">
+                    <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            ข้อมุลเอกสารทั้งหมด
+                        </h3>
+                    </div>
+                    <div class="panel-body custom-height">
+                        <div ng-repeat="maindoc in $ctrl.maindocs" class="col-md-12 list-group-item custom-list-group-item">
+                          หมายเลข ส.ป. :{{maindoc.itemNo}} | 
+                          วันที่รับสินค้า :{{maindoc.receiveDate}} |
+                          หมายเลขสัญญา :{{maindoc.contractNo}} |
+                          วันที่ดำเนินการ :{{maindoc.actionDate}} |
+                          ผู้ค้า :{{maindoc.vendorNo}} |
+                          หน่วย :{{maindoc.departmentNo}} |
+                          คลัง :{{maindoc.warhouseNo}} |
+                          พื้นที่ :{{maindoc.zoneNo}} |
+                          จำนวนที่รับ :{{maindoc.receiveAmount}} |
+                          จำนวนที่เบิก :{{maindoc.orderAmount}} |
+                          ยอดคงเหลือ :{{maindoc.balanceAmount}} |
+                          หมายเหตุ :{{maindoc.remark}} |
+                          รหัส RFID :{{maindoc.rfid}} 
+                        </div>
+                    </div>
+                </div>
+             </div>          
+        </div>
+     </div>
+</div>        

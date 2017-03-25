@@ -16,6 +16,7 @@ class GateIntCtrl {
         this.subscribe('maindocs');
         this.subscribe('rfidlist');
         this.subscribe('rfidtmp');
+        Meteor.call('rfidtmp.removeAll');
 
         this.helpers({
             
@@ -87,33 +88,11 @@ class GateIntCtrl {
                                  */
                             }
 
-                            if($scope.maindocsObj[rfidList[r].maindocNo]["token"] == $scope.maindocsObj[rfidList[r].maindocNo]["max"]){
-                                
-                                Session.set("rfidCount", $scope.maindocsObj[rfidList[r].maindocNo]["count"]);
-
-                                /** Update maindocs to be ready for in warehouse state */
-                                Meteor.call('maindocs.updateStatus', rfidList[r].maindocNo, $scope.maindocsObj[rfidList[r].maindocNo]["count"], function(error, result){
-                                    
-                                    /** Update rfidlist to be ready for in warehouse state */
-                                    Meteor.call('rfidlist.updateStatusIn', Session.get("rfidCount"), function(error, result){
-
-                                        /** Update rfidlist to be ready for in warehouse state */
-                                        Meteor.call('rfidtmp.remove', Session.get("rfidCount"), function(error, result){
-                                            
-                                            
-                                        });
-                                    });
-                                    
-                                });
-                                
-                                console.log("hae");
-                            }
-
                         /** Insert new document record into scope obj */
                         }else{
                             var docObj = Maindocs.find({id:rfidList[r].maindocNo},  {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
                                 function (item) { 
-                                    return {max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
+                                    return {_id:item._id, max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
                             });
 
                             docObj[docObj.length-1]['count'][rfidList[r].rfid] = "I";
@@ -121,6 +100,27 @@ class GateIntCtrl {
 
                             console.log(docObj);
                             $scope.maindocsObj[rfidList[r].maindocNo] = docObj[docObj.length-1];
+                        }
+
+                        if($scope.maindocsObj[rfidList[r].maindocNo]["token"] == $scope.maindocsObj[rfidList[r].maindocNo]["max"]){
+                            
+                            Session.set("rfidCount", $scope.maindocsObj[rfidList[r].maindocNo]["count"]);
+
+                            /** Update maindocs to be ready for in warehouse state */
+                            Meteor.call('maindocs.updateStatus', $scope.maindocsObj[rfidList[r].maindocNo]["_id"], $scope.maindocsObj[rfidList[r].maindocNo]["count"], function(error, result){
+                                
+                                /** Update rfidlist to be ready for in warehouse state */
+                                Meteor.call('rfidlist.updateStatusIn', Session.get("rfidCount"), function(error, result){
+
+                                    /** Update rfidlist to be ready for in warehouse state */
+                                    Meteor.call('rfidtmp.remove', Session.get("rfidCount"), function(error, result){
+                                        
+                                    });
+                                });
+                                
+                            });
+                            
+                            console.log("hae");
                         }
 
                     }else{
