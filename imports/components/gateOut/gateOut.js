@@ -4,10 +4,18 @@ import angularMeteor from 'angular-meteor';
 
 import template from './gateOut.html';
 
+import { Maindocs } from '../../api/assets/maindocs.js';
+import { Rfidlist } from '../../api/assets/rfidlist.js';
+import { Rfidtmp } from '../../api/assets/rfidtmp.js';
 
 class GateOutCtrl {
+
     constructor($scope) {
+        $scope.maindocsObj = {};
         $scope.viewModel(this);
+        this.subscribe('maindocs');
+        this.subscribe('rfidlist');
+        this.subscribe('rfidtmp');
 
         this.helpers({
 
@@ -16,11 +24,22 @@ class GateOutCtrl {
 
                 var maindocNum = {};
 
-                var rfidNumbers = Rfidtmp.find({}).map(
+                /** ทุก map ทำให้ ิbig O เกิดปัญหาขึ้นเพราะต้องทำ double processes ในการดึงข้อมูลจาก array ใหญ่ */
+                var rfidNumbersTmp = Rfidtmp.find({}).map(
                     function (item) { 
-                        return item.rfid; 
+                        return {_id: item._id, rfid: item.rfid}; 
                     }
                 );
+
+                var rfidNumbers = [];
+                for(var i in rfidNumbersTmp){
+                    rfidNumbers.push(rfidNumbersTmp[i]['rfid']);
+                }
+
+                                
+                console.log("------Maindoc 1------");
+                console.log(rfidNumbers);
+                console.log("------Maindoc 2------");
                 
                 /**
                  * Find match rfid from maindocs collection
@@ -28,11 +47,11 @@ class GateOutCtrl {
                 var rfidList = Rfidlist.find({rfid:{$in:rfidNumbers}}).map(
                     function (item) { 
                         /** มีปัญหาสำหรับ id ที่ซ้ำกันอยู่ */
-                        return {rfid: item.rfid, maindocNo: item.maindocNo, status: item.status}; 
+                        return {_id: item._id, rfid: item.rfid, maindocNo: item.maindocNo, status: item.status}; 
                     }
                 );
 
-                         /**
+                /**
                  * Find invalid status of rfid from retreive collection
                  */
                 var matchList = [];
@@ -66,7 +85,7 @@ class GateOutCtrl {
                                 Meteor.call('maindocs.updateStatus', rfidList[r].maindocNo, $scope.maindocsObj[rfidList[r].maindocNo]["count"], function(error, result){
                                     
                                     /** Update rfidlist to be ready for in warehouse state */
-                                    Meteor.call('rfidlist.updateStatus', Session.get("rfidCount"), function(error, result){
+                                    Meteor.call('rfidlist.updateStatusOut', Session.get("rfidCount"), function(error, result){
 
                                         /** Update rfidlist to be ready for in warehouse state */
                                         Meteor.call('rfidtmp.remove', Session.get("rfidCount"), function(error, result){
@@ -82,16 +101,17 @@ class GateOutCtrl {
 
                         /** Insert new document record into scope obj */
                         }else{
-                            var docObj = Maindocs.find({id:rfidList[r].maindocNo}).map(
+                            
+                            var docObj = Maindocs.find({id:rfidList[r].maindocNo}, {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
                                 function (item) { 
-                                    return {max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
+                                    return {max: item.orderAmount, count:item.rfid ,token: 0};
                             });
 
-                            docObj[0]['count'][rfidList[r].rfid] = "O";
-                            docObj[0]['token']++;
+                            docObj[docObj.length-1]['count'][rfidList[r].rfid] = "O";
+                            docObj[docObj.length-1]['token']++;
 
                             console.log(docObj);
-                            $scope.maindocsObj[rfidList[r].maindocNo] = docObj[0];
+                            $scope.maindocsObj[rfidList[r].maindocNo] = docObj[docObj.length-1];
                         }
 
                     }else{
@@ -111,9 +131,13 @@ class GateOutCtrl {
             }
 
         });
-
         
     }
+
+    removeRfidTmpAll() {
+        console.log("Remove all rfidtmp");
+        Meteor.call('rfidtmp.removeAll');  
+    }   
     
 }
 

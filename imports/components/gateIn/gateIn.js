@@ -31,27 +31,35 @@ class GateIntCtrl {
 
                 var maindocNum = {};
 
-                var rfidNumbers = Rfidtmp.find({}).map(
+                /** ทุก map ทำให้ ิbig O เกิดปัญหาขึ้นเพราะต้องทำ double processes ในการดึงข้อมูลจาก array ใหญ่ */
+                var rfidNumbersTmp = Rfidtmp.find({}).map(
                     function (item) { 
-                        return item.rfid; 
+                        return {_id: item._id, rfid: item.rfid}; 
                     }
                 );
-                
+
+                var rfidNumbers = [];
+                for(var i in rfidNumbersTmp){
+                    rfidNumbers.push(rfidNumbersTmp[i]['rfid']);
+                }
+
+                                
+                console.log("------Maindoc 1------");
+                console.log(rfidNumbers);
+                console.log("------Maindoc 2------");
+
+
                 /**
                  * Find match rfid from maindocs collection
                  */
                 var rfidList = Rfidlist.find({rfid:{$in:rfidNumbers}}).map(
                     function (item) { 
                         /** มีปัญหาสำหรับ id ที่ซ้ำกันอยู่ */
-                        return {rfid: item.rfid, maindocNo: item.maindocNo, status: item.status}; 
+                        return {_id: item._id, rfid: item.rfid, maindocNo: item.maindocNo, status: item.status}; 
                     }
                 );
 
                 //var rfidList2 = Rfidlist.find({rfid:{$in:rfidNumbers}});
-                
-                console.log("------Maindoc 1------");
-                console.log(rfidNumbers);
-                console.log("------Maindoc 2------");
 
                 /**
                  * Find invalid status of rfid from retreive collection
@@ -87,7 +95,7 @@ class GateIntCtrl {
                                 Meteor.call('maindocs.updateStatus', rfidList[r].maindocNo, $scope.maindocsObj[rfidList[r].maindocNo]["count"], function(error, result){
                                     
                                     /** Update rfidlist to be ready for in warehouse state */
-                                    Meteor.call('rfidlist.updateStatus', Session.get("rfidCount"), function(error, result){
+                                    Meteor.call('rfidlist.updateStatusIn', Session.get("rfidCount"), function(error, result){
 
                                         /** Update rfidlist to be ready for in warehouse state */
                                         Meteor.call('rfidtmp.remove', Session.get("rfidCount"), function(error, result){
@@ -103,16 +111,16 @@ class GateIntCtrl {
 
                         /** Insert new document record into scope obj */
                         }else{
-                            var docObj = Maindocs.find({id:rfidList[r].maindocNo}).map(
+                            var docObj = Maindocs.find({id:rfidList[r].maindocNo},  {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
                                 function (item) { 
                                     return {max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
                             });
 
-                            docObj[0]['count'][rfidList[r].rfid] = "I";
-                            docObj[0]['token']++;
+                            docObj[docObj.length-1]['count'][rfidList[r].rfid] = "I";
+                            docObj[docObj.length-1]['token']++;
 
                             console.log(docObj);
-                            $scope.maindocsObj[rfidList[r].maindocNo] = docObj[0];
+                            $scope.maindocsObj[rfidList[r].maindocNo] = docObj[docObj.length-1];
                         }
 
                     }else{
@@ -132,7 +140,12 @@ class GateIntCtrl {
                 return {"success":rfidMatchList, "invalid":rfidInvalidList, "fail":rfidNotMatchList};
             },
         });
-    }  
+    } 
+
+    removeRfidTmpAll() {
+        console.log("Remove all rfidtmp");
+        Meteor.call('rfidtmp.removeAll');   
+    }    
 }
 
 export default angular.module('gateIn', [

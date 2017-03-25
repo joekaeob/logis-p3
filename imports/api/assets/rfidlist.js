@@ -75,12 +75,23 @@ Meteor.methods({
      * Method to insert document into collection. [basic operation]
      * @param document BSON which need to update collection
      */ 
-    'rfidlist.updateStatus' (rfidlist) {
+    'rfidlist.updateStatusIn' (rfidlist) {
         for(r in rfidlist){
             Rfidlist.update(
                 {rfid: r},
                 { $set:
                     {status:"I"} 
+                }
+            );
+        }
+    },
+
+     'rfidlist.updateStatusOut' (rfidlist) {
+        for(r in rfidlist){
+            Rfidlist.update(
+                {rfid: r},
+                { $set:
+                    {status:"O"} 
                 }
             );
         }

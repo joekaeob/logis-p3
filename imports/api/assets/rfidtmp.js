@@ -32,6 +32,10 @@ Meteor.methods({
                 rfid:r,
             });
         }    
+    },
+
+    'rfidtmp.removeAll' () {
+        Rfidtmp.remove({});
     }
 
 });    

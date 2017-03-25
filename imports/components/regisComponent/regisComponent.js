@@ -87,7 +87,7 @@ class RegisComponentCtrl {
         var tmp = {};
 
         for(var i=0; i<newMaindoc.receiveAmount; i++)
-            tmp[rfids[i].rfid] = "I";
+            tmp[rfids[i].rfid] = "R";
         
         newMaindoc['rfid'] = tmp;
         Session.set("newMaindoc", newMaindoc);
@@ -131,7 +131,19 @@ class RegisComponentCtrl {
                         rfid.createdAt = new Date();
                         console.log(rfid);
                         
-                        Meteor.call('rfidlist.insert', rfid);
+                        Meteor.call('rfidlist.insert', rfid, function(error, result){
+                            
+                            if(error){
+                                console.log(error);
+                            }
+
+                            Meteor.call('regisdocs.remove', function(error, result){
+                                if(error){
+                                    console.log(error);
+                                }
+                            });
+
+                        });
                     }
 
                 });

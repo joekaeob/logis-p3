@@ -44,5 +44,11 @@ var checkModel = function(regisdocs){
  * 3. Create all database adapter (method) of this collection here.
  */ 
 Meteor.methods({
-
+    /* 
+    * Method to remove document from collection. [basic operation]
+    * @param id of document which need to remove from collection
+    */ 
+    'regisdocs.remove' () {
+        Regisdocs.remove({});
+    }
 });    
