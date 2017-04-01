@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> ค้นหา/แก้ไข ผู้ขาย
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> ค้นหา/แก้ไข เจ้าของผลิตภัณฑ์
                     </h3>
                 </div>
                 <div class="panel-body custom-height">
@@ -15,10 +15,10 @@
                     <div class="list-group text-left">
                         <div ng-repeat="vendor in $ctrl.vendors" class="col-md-12 list-group-item custom-list-group-item">
                             <div class="col-md-6 text-left">
-                                <h4><b>ชื่อผู้ค้า :</b> {{vendor.name}}</h4>
+                                <h4><b>ชื่อเจ้าของผลิตภัณฑ์ :</b> {{vendor.name}}</h4>
                             </div>
                             <div class="col-md-6 text-right">
-                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                 <!--<button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>-->
                                  <button class="btn btn-danger" ng-click="$ctrl.removeVendor(vendor.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>   
                             <div class="col-md-12"> 
@@ -35,14 +35,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> เพิ่ม ผู้ขาย
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> เพิ่ม เจ้าของผลิตภัณฑ์
                     </h3>
                 </div>
                 <div class="panel-body custom-height">
                     
                     <form name="newVendorForm" class="form-horizontal text-center" ng-submit="$ctrl.addVendor($ctrl.newVendor)">
 
-                        <label class="control-label col-md-3" for="name">ชื่อ ส.ป. :</label>
+                        <label class="control-label col-md-3" for="name">ชื่อเจ้าของผลิตภัณฑ์ :</label>
                         <div class="col-md-9">
                             <p><input class="form-control" ng-model="$ctrl.newVendor.name" type="text" id="name" placeholder="เช่น โฮฟมันน์" required/></p>
                         </div>

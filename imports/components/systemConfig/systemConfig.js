@@ -8,6 +8,7 @@ import { Maindocs } from '../../api/assets/maindocs.js';
 import { Rfidlist } from '../../api/assets/rfidlist.js';
 import { Rfidtmp } from '../../api/assets/rfidtmp.js';
 import { Rfidtmpout } from '../../api/assets/rfidtmpout.js';
+import { Regisdocs } from '../../api/assets/regisdocs.js';
 
 class SystemConfigCtrl {
     constructor($scope) {
@@ -17,6 +18,7 @@ class SystemConfigCtrl {
         this.subscribe('rfidlist');
         this.subscribe('rfidtmp');
         this.subscribe('rfidtmpout');
+        this.subscribe('regisdocs');
 
         this.helpers({
              maindocs(){
@@ -44,6 +46,11 @@ class SystemConfigCtrl {
     removeRfidTmpOutAll() {
         console.log("Remove all rfidtmpout");
         Meteor.call('rfidtmpout.removeAll');  
+    }
+
+    removeRegisdocsAll() {
+        console.log("Remove all regisdocs");
+        Meteor.call('regisdocs.remove');  
     }
 }   
  

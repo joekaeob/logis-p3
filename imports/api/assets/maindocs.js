@@ -137,7 +137,9 @@ Meteor.methods({
          Maindocs.update(
             { _id: docNo },
             { $set:
-                { rfid: rfidlist }
+                { rfid: rfidlist,  
+                  remark: "done",  
+                  actionDate: new Date()}
             }
         );
     },  

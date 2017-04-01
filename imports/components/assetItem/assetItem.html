@@ -15,14 +15,14 @@
                     <div class="list-group text-left">
                         <div ng-repeat="item in $ctrl.items" class="col-md-12 list-group-item custom-list-group-item">
                             <div class="col-md-6 text-left">
-                                <h4><b>ส.ป. :</b> {{item.name}}</h4>
+                                <h4><b>ชื่อครุภัณฑ์ :</b> {{item.name}}</h4>
                             </div>
                             <div class="col-md-6 text-right">
-                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                 <!--<button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>-->
                                  <button class="btn btn-danger" ng-click="$ctrl.removeItem(item.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>   
                             <div class="col-md-12"> 
-                                <b>หมายเลข:</b> {{item.number}}
+                                <b>หมายเลขครุภัณฑ์:</b> {{item.number}}
                             </div>
                             <div class="col-md-12">     
                                 <b>ราคา:</b> {{item.price}}
@@ -48,12 +48,12 @@
                      
                      <form name="newItemForm" class="form-horizontal text-center" ng-submit="$ctrl.addItem($ctrl.newItem)">
 
-                        <label class="control-label col-md-3" for="name">ชื่อ ส.ป. :</label>
+                        <label class="control-label col-md-3" for="name">ชื่อครุภัณฑ์ :</label>
                         <div class="col-md-9">
                             <p><input class="form-control" ng-model="$ctrl.newItem.name" type="text" id="name" placeholder="เช่น UM-01" required/></p>
                         </div>
 
-                        <label class="control-label col-md-3" for="number">หมายเลข ส.ป. :</label>
+                        <label class="control-label col-md-3" for="number">หมายเลขครุภัณฑ์ :</label>
                         <div class="col-md-9">
                             <p><input class="form-control" ng-model="$ctrl.newItem.number" type="text" id="number" placeholder="เช่น 6135-XX-134-1267" required/></p>
                         </div>

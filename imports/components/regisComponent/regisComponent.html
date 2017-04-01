@@ -27,7 +27,11 @@
                             </div>
                             <div class="col-md-12"> 
                                 <ul>
-                                    <p ng-repeat="(key, value) in maindoc.rfid">รหัส RFID: {{key}} | สถานะ: {{value}}</p>
+                                    <p ng-repeat="(key, value) in maindoc.rfid">รหัส RFID: {{key}} | 
+                                        <span ng-if="value === 'R'"> สถานะ: ลงทะเบียน</span>   
+                                        <span ng-if="value === 'I'"> สถานะ: ภายในคลัง</span>   
+                                        <span ng-if="value === 'O'"> สถานะ: ถูกเบิก</span>   
+                                    </p>
                                 </ul>    
                             </div>
                         </div>
@@ -44,17 +48,9 @@
                     </div>
                     <div class="panel-body custom-height">
                         <form name="newMaindocForm" class="form-horizontal text-center" ng-submit="$ctrl.addMaindoc($ctrl.newMaindoc, $ctrl.regisdocs)">
-                            <label class="control-label col-md-3" for="itemNo">ส.ป. :</label>
-                            <div class="col-md-9">
-                                <p>
-                                    <select class="form-control" id="itemNo" ng-model="$ctrl.newMaindoc.itemNo" required>
-                                        <option ng-repeat="item in $ctrl.items" value="{{item.id}}">{{item.name}}</option>
-                                    </select>
-                                </p>
-                            </div>
-
-                            <label class="control-label col-md-3" for="contractNo">สัญญา :</label>
-                            <div class="col-md-9">
+                            
+                            <label class="control-label col-md-4" for="contractNo">เลขทีสัญญา :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <select class="form-control" id="contractNo" ng-model="$ctrl.newMaindoc.contractNo" required>
                                         <option ng-repeat="contract in $ctrl.contracts" value="{{contract.id}}">{{contract.name}}</option>
@@ -62,8 +58,17 @@
                                 </p>
                             </div>
 
-                            <label class="control-label col-md-3" for="vendorNo">ผู้ค้า :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="itemNo">ส.ป. :</label>
+                            <div class="col-md-8">
+                                <p>
+                                    <select class="form-control" id="itemNo" ng-model="$ctrl.newMaindoc.itemNo" required>
+                                        <option ng-repeat="item in $ctrl.items" value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </p>
+                            </div>
+
+                            <label class="control-label col-md-4" for="vendorNo">เจ้าของผลิตภัณฑ์ :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <select class="form-control" id="vendorNo" ng-model="$ctrl.newMaindoc.vendorNo" required>
                                         <option ng-repeat="vendor in $ctrl.vendors" value="{{vendor.id}}">{{vendor.name}}</option>
@@ -72,8 +77,8 @@
                             </div>
 
                             
-                            <label class="control-label col-md-3" for="receiveDate">วันที่รับสินค้า :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="receiveDate">วันที่รับสินค้า :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <div class="input-group">
                                         <span class="input-group-addon fa fa-calendar"></span>
@@ -84,8 +89,8 @@
                                 <script>$('#receiveDate').datepicker();</script>
                             </div>
 
-                            <label class="control-label col-md-3" for="departmentNo">หน่วย :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="departmentNo">หน่วยรับ :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <select class="form-control" id="departmentNo" ng-model="$ctrl.newMaindoc.departmentNo" required>
                                         <option ng-repeat="department in $ctrl.departments" value="{{department.id}}">{{department.name}}</option>
@@ -93,8 +98,8 @@
                                 </p>
                             </div>
 
-                            <label class="control-label col-md-3" for="warhouseNo">คลัง :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="warhouseNo">คลัง :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <select class="form-control" id="warhouseNo" ng-model="$ctrl.newMaindoc.warhouseNo" required>
                                         <option ng-repeat="warehouse in $ctrl.warehouses" value="{{warehouse.id}}">{{warehouse.name}}</option>
@@ -102,8 +107,8 @@
                                 </p>
                             </div>
 
-                            <label class="control-label col-md-3" for="zoneNo">พื้นที่ :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="zoneNo">พื้นที่ :</label>
+                            <div class="col-md-8">
                                 <p>
                                     <select class="form-control" id="zoneNo" ng-model="$ctrl.newMaindoc.zoneNo" required>
                                         <option ng-repeat="zone in $ctrl.zones" value="{{zone.id}}">{{zone.name}}</option>
@@ -111,8 +116,8 @@
                                 </p>
                             </div>
 
-                            <label class="control-label col-md-3" for="receiveAmount">ปริมาณที่รับ :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="receiveAmount">ปริมาณที่รับ :</label>
+                            <div class="col-md-8">
                                 <p>
                                      <input class="form-control" id="receiveAmount" name="receiveAmount" type="text" 
                                         ng-model="$ctrl.newMaindoc.receiveAmount"
@@ -120,8 +125,8 @@
                                 </p>
                             </div>
 
-                            <label class="control-label col-md-3" for="remark">หมายเหตุ :</label>
-                            <div class="col-md-9">
+                            <label class="control-label col-md-4" for="remark">หมายเหตุ :</label>
+                            <div class="col-md-8">
                                 <p>
                                      <input class="form-control" id="remark" name="remark" type="text" 
                                         ng-model="$ctrl.newMaindoc.remark" required/>
@@ -129,8 +134,8 @@
                             </div>
 
                             <div ng-repeat="n in [] | range:$ctrl.newMaindoc.receiveAmount">
-                                <label class="control-label col-md-3" for="rfid{{n}}">รหัส RFID  {{n+1}} :</label>
-                                <div class="col-md-9">
+                                <label class="control-label col-md-4" for="rfid{{n}}">รหัส RFID  {{n+1}} :</label>
+                                <div class="col-md-8">
                                     <p>
                                         <input class="form-control" id="rfid{{n}}" name="rfid{{n}}" type="text" 
                                             ng-disabled="true"

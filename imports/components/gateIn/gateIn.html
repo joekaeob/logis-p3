@@ -12,7 +12,7 @@
                             <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนสำเร็จ</b>
                         </h3>
                     </div>
-                    <div class="panel-body custom-height">
+                    <div class="panel-body custom-height3">
                         <ul class="list-group">
                             <li class="list-group-item"
                                     ng-repeat="item in $ctrl.matchresult.success">
@@ -24,15 +24,44 @@
                     </div>
                 </div>
             </div> 
+                   
+            <div class="col-md-6">
 
-            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> สถานะการลงทะเบียน
+                        </h3>
+                    </div>
+                    <div class="panel-body custom-height3">
+                        <div ng-repeat="maindoc in maindocsObj" class="col-md-12 list-group-item custom-list-group-item">
+                            <div><b>หมายเลขเอกสาร: {{maindoc.id}} | จำนวนที่รับ: {{maindoc.token}}/{{maindoc.max}}</b></div>
+                            <ul>
+                                <p ng-repeat="(key, value) in maindoc.count">
+                                    รหัส RFID: {{key}} |
+                                    <span ng-if="value === 'R'"> สถานะ: ลงทะเบียน</span>   
+                                    <span ng-if="value === 'I'"> สถานะ: ภายในคลัง</span>   
+                                    <span ng-if="value === 'O'"> สถานะ: ถูกเบิก</span>    
+                                </p>
+                            </ul>    
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+           
+        </div>
+
+        <div class="row">
+
+                <div class="col-md-6">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนไม่ถูกต้อง</b>
                         </h3>
                     </div>
-                    <div class="panel-body custom-height">
+                    <div class="panel-body custom-height3">
                         <ul class="list-group">
                             <li class="list-group-item"
                                     ng-repeat="item in $ctrl.matchresult.invalid">
@@ -45,14 +74,14 @@
                 </div>
             </div> 
 
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนไม่สำเร็จ</b>
                         </h3>
                     </div>
-                    <div class="panel-body custom-height">
+                    <div class="panel-body custom-height3">
                         <ul class="list-group">
                             <li class="list-group-item"
                                     ng-repeat="item in $ctrl.matchresult.fail">
@@ -62,7 +91,9 @@
                         </ul>
                     </div>
                 </div>
-            </div>      
+            </div>   
+        
         </div>
+        
     </div>
 </div>

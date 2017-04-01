@@ -16,6 +16,11 @@
     height: 350px;
 }
 
+.custom-height3{
+    height: 200px;
+    overflow-y: scroll;
+}
+
 .custom-bg-color1{
     background-color: #FA5858;
     color: #ffffff;

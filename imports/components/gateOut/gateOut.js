@@ -60,31 +60,35 @@ class GateOutCtrl {
                 var rfidInvalidList = [];
                 for(r in rfidList){
                     
-                    //matchList.push(rfidList[r].rfid);
+                    matchList.push(rfidList[r].rfid);
                     
                     if(rfidList[r].status === "I"){
 
-                         /** Check duplicate record in scope objs */
-                        if($scope.maindocsObj[rfidList[r].maindocNo]){
-                         
-                            if($scope.maindocsObj[rfidList[r].maindocNo]["count"][rfidList[r].rfid] === "I"){
-                                $scope.maindocsObj[rfidList[r].maindocNo]["count"][rfidList[r].rfid] = "O";
-                                console.log("this one " + rfidList[r].rfid + "become O");
+                        //rfidMatchList.push(rfidList[r]);
 
-                                $scope.maindocsObj[rfidList[r].maindocNo]["token"]++;
-                            }else{
-                                /**
-                                 * ไม่รวมเคสที่ RFID ที่ทำการลงทะเบียนถูกต้องแต่มีรหัสซ้ำผ่านเข้า gate
-                                 * เพราะฉนั้นระบบไม่สามารถดัก RFID ที่มี status R แต่มีรหัสซ้ำได้ ถ้าจะดักให้ดักที่ else ตรงนี้
-                                 */
+                         /** Check existing record in scope objs, then update status */
+                        if($scope.maindocsObj[rfidList[r].maindocNo]){
+                            
+                            if($scope.maindocsObj[rfidList[r].maindocNo]["token"] < $scope.maindocsObj[rfidList[r].maindocNo]["max"]){
+                                if($scope.maindocsObj[rfidList[r].maindocNo]["count"][rfidList[r].rfid] === "I"){
+                                    $scope.maindocsObj[rfidList[r].maindocNo]["count"][rfidList[r].rfid] = "O";
+                                    console.log("this one " + rfidList[r].rfid + "become O");
+
+                                    $scope.maindocsObj[rfidList[r].maindocNo]["token"]++;
+                                }else{
+                                    /**
+                                     * ไม่รวมเคสที่ RFID ที่ทำการลงทะเบียนถูกต้องแต่มีรหัสซ้ำผ่านเข้า gate
+                                     * เพราะฉนั้นระบบไม่สามารถดัก RFID ที่มี status R แต่มีรหัสซ้ำได้ ถ้าจะดักให้ดักที่ else ตรงนี้
+                                     */
+                                }
                             }
 
                         /** Insert new document record into scope obj */
                         }else{
                             
-                            var docObj = Maindocs.find({id:rfidList[r].maindocNo}, {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
+                            var docObj = Maindocs.find({id:rfidList[r].maindocNo, remark:"init"}, {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
                                 function (item) { 
-                                    return {_id:item._id, max: item.orderAmount, count:item.rfid ,token: 0};
+                                    return {_id:item._id, id:item.itemNo, max: item.orderAmount, count:item.rfid, status: item.remark, token: 0};
                             });
 
                             docObj[docObj.length-1]['count'][rfidList[r].rfid] = "O";
@@ -98,9 +102,15 @@ class GateOutCtrl {
 
                         if($scope.maindocsObj[rfidList[r].maindocNo]["max"] === 0){
                             rfidInvalidList.push(rfidList[r]);
+                        }else if($scope.maindocsObj[rfidList[r].maindocNo]["token"] > $scope.maindocsObj[rfidList[r].maindocNo]["max"]){    
+                            rfidInvalidList.push(rfidList[r]);
+                        }else if($scope.maindocsObj[rfidList[r].maindocNo]["status"] === "done"){    
+                            rfidInvalidList.push(rfidList[r]);
                         }else{
                             rfidMatchList.push(rfidList[r]);
                         }
+
+                        //rfidMatchList.push(rfidList[r]);
                         
                         if($scope.maindocsObj[rfidList[r].maindocNo]["token"] == $scope.maindocsObj[rfidList[r].maindocNo]["max"]){
                             
@@ -109,7 +119,8 @@ class GateOutCtrl {
                             /** Update maindocs to be ready for in warehouse state */
                             Meteor.call('maindocs.updateStatus', $scope.maindocsObj[rfidList[r].maindocNo]["_id"], $scope.maindocsObj[rfidList[r].maindocNo]["count"], function(error, result){
                                 
-                                console.log(Session.get("rfidCount"));
+                                $scope.maindocsObj[rfidList[r].maindocNo]["status"] = "done";
+
                                 /** Update rfidlist to be ready for in warehouse state */
                                 Meteor.call('rfidlist.updateStatusOut', Session.get("rfidCount"), function(error, result){
 

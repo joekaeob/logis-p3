@@ -92,7 +92,7 @@ class GateIntCtrl {
                         }else{
                             var docObj = Maindocs.find({id:rfidList[r].maindocNo},  {sort: [ ["createAt", "desc"], ["id", "asc"] ] }).map(
                                 function (item) { 
-                                    return {_id:item._id, max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
+                                    return {_id:item._id, id:item.itemNo, max: Object.keys(item.rfid).length, count:item.rfid ,token: 0};
                             });
 
                             docObj[docObj.length-1]['count'][rfidList[r].rfid] = "I";

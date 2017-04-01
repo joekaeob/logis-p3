@@ -15,14 +15,14 @@
                     <div class="list-group text-left">
                         <div ng-repeat="contract in $ctrl.contracts" class="col-md-12 list-group-item custom-list-group-item">
                             <div class="col-md-6 text-left">
-                                <h4><b>เลขสัญญา :</b> {{contract.name}}</h4>
+                                <h4><b>เลขที่สัญญา :</b> {{contract.name}}</h4>
                             </div>
                             <div class="col-md-6 text-right">
-                                 <button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                 <!--<button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>-->
                                  <button class="btn btn-danger" ng-click="$ctrl.removeContract(contract.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </div>   
                             <div class="col-md-12"> 
-                                <b>รายละเอียด :</b> {{contract.description}}
+                                <b>ชื่อโครงการ :</b> {{contract.description}}
                             </div>
                         </div>
                     </div>
@@ -42,12 +42,12 @@
                     
                     <form name="newContractForm" class="form-horizontal text-center" ng-submit="$ctrl.addContract($ctrl.newContract)">
 
-                        <label class="control-label col-md-3" for="name">ชื่อ ส.ป. :</label>
+                        <label class="control-label col-md-3" for="name">เลขที่สัญญา :</label>
                         <div class="col-md-9">
                             <p><input class="form-control" ng-model="$ctrl.newContract.name" type="text" id="name" placeholder="เช่น สซ.26/58" required/></p>
                         </div>
                         
-                        <label class="control-label col-md-3" for="description">รายละเอียด :</label>
+                        <label class="control-label col-md-3" for="description">ชื่อโครงการ :</label>
                         <div class="col-md-9">
                             <p><input class="form-control" ng-model="$ctrl.newContract.description" type="text" id="description" placeholder=""/></p>
                         </div>

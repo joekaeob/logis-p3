@@ -52,6 +52,7 @@ class OrderComponentCtrl {
         newMaindoc.receiveAmount = 0;
         newMaindoc.orderAmount = orderNum;
         newMaindoc.balanceAmount = balance;
+        newMaindoc.remark = "init";
         newMaindoc.actionDate = new Date();
 
         delete newMaindoc["$$hashKey"];
