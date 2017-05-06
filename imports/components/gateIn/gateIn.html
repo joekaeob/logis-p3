@@ -55,7 +55,7 @@
         <div class="row">
 
                 <div class="col-md-6">
-                <div class="panel panel-warning">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนไม่ถูกต้อง</b>
@@ -68,6 +68,7 @@
                                 <b>รหัส RFID:</b>{{item.rfid}} |
                                 <b>หมายเลขเอกสาร:</b>{{item.maindocNo}} | 
                                 <b>สถานะ:</b> {{item.status}}
+                                <button class="btn btn-primary" ng-click="$ctrl.turnoffRedLED();">ผ่าน</button>
                             </li>
                         </ul>
                     </div>
@@ -75,7 +76,7 @@
             </div> 
 
             <div class="col-md-6">
-                <div class="panel panel-danger">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i> ลงทะเบียนไม่สำเร็จ</b>
@@ -86,7 +87,8 @@
                             <li class="list-group-item"
                                     ng-repeat="item in $ctrl.matchresult.fail">
                                 <b>รหัส RFID:</b>{{item.rfid}} |
-                                <b>เวลา:</b>{{item.createAt}}
+                                <!--<b>เวลา:</b>{{item.createAt}}-->
+                                <button class="btn btn-primary" ng-click="$ctrl.turnoffYellowLED();">ผ่าน</button>
                             </li>
                         </ul>
                     </div>

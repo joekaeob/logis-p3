@@ -45,19 +45,22 @@
                     </div>
                     <div class="panel-body custom-height">
                         <div ng-repeat="maindoc in $ctrl.maindocs" class="col-md-12 list-group-item custom-list-group-item">
-                          หมายเลข ส.ป. :{{maindoc.itemNo}} | 
-                          วันที่รับสินค้า :{{maindoc.receiveDate}} |
-                          หมายเลขสัญญา :{{maindoc.contractNo}} |
-                          วันที่ดำเนินการ :{{maindoc.actionDate}} |
-                          ผู้ค้า :{{maindoc.vendorNo}} |
-                          หน่วย :{{maindoc.departmentNo}} |
-                          คลัง :{{maindoc.warhouseNo}} |
-                          พื้นที่ :{{maindoc.zoneNo}} |
-                          จำนวนที่รับ :{{maindoc.receiveAmount}} |
-                          จำนวนที่เบิก :{{maindoc.orderAmount}} |
-                          ยอดคงเหลือ :{{maindoc.balanceAmount}} |
-                          หมายเหตุ :{{maindoc.remark}} |
-                          รหัส RFID :{{maindoc.rfid}} 
+                            <b>หมายเลข ส.ป. :{{maindoc.itemNo}}</b> <br/> 
+                            วันที่รับสินค้า :{{maindoc.receiveDate}} |
+                            วันที่ดำเนินการ :{{maindoc.actionDate}} <br/>
+                            หมายเลขสัญญา :{{maindoc.contractNo}} <br/>
+                            ผู้ค้า :{{maindoc.vendorNo}} <br/>
+                            หน่วย :{{maindoc.departmentNo}} <br/>
+                            คลัง :{{maindoc.warhouseNo}} <br/>
+                            พื้นที่ :{{maindoc.zoneNo}} <br/>
+                            <b>จำนวนที่รับ :{{maindoc.receiveAmount}} | จำนวนที่เบิก :{{maindoc.orderAmount}} | ยอดคงเหลือ :{{maindoc.balanceAmount}}</b><br/>
+                            <ul>
+                                <p ng-repeat="(key, value) in maindoc.rfid">รหัส RFID: {{key}} | 
+                                    <span ng-if="value === 'R'"> สถานะ: ลงทะเบียน</span>   
+                                    <span ng-if="value === 'I'"> สถานะ: ภายในคลัง</span>   
+                                    <span ng-if="value === 'O'"> สถานะ: ถูกเบิก</span>   
+                                </p>
+                            </ul>    
                         </div>
                     </div>
                 </div>

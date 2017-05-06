@@ -10,8 +10,9 @@ import { Rfidtmpout } from '../../api/assets/rfidtmpout.js';
 
 class GateOutCtrl {
 
-    constructor($scope) {
+    constructor($scope, $http) {
         $scope.maindocsObj = {};
+        $scope.ledStatus = {'danger':0, 'warning':0};
         $scope.viewModel(this);
         this.subscribe('maindocs');
         this.subscribe('rfidlist');
@@ -126,7 +127,19 @@ class GateOutCtrl {
 
                                     /** Update rfidlist to be ready for in warehouse state */
                                     Meteor.call('rfidtmpout.remove', Session.get("rfidCount"), function(error, result){
-                                         
+                                        $http.get("http://localhost/logisflash/index.php?status=2")
+                                        .then(function(response) {
+                                            console.log(response);
+                                        });
+
+                                        $scope.ledStatus.warning = rfidNotMatchList.length;
+
+                                        $http.get("http://localhost/logisflash/index.php?status=4")
+                                        .then(function(response) {
+                                            console.log(response);
+                                        });
+
+                                        $scope.ledStatus.danger = rfidInvalidList.length;
                                     });
                                 });
                                 
@@ -148,6 +161,28 @@ class GateOutCtrl {
                         return {rfid: item.rfid, createAt: item.createAt}; 
                     }
                 );
+
+                
+                //Warning
+                if($scope.ledStatus.warning < rfidNotMatchList.length){
+                    $http.get("http://localhost/logisflash/index.php?status=1")
+                    .then(function(response) {
+                        console.log(response);
+                    });
+
+                    $scope.ledStatus.warning = rfidNotMatchList.length;
+                }
+
+                //Danger
+                if($scope.ledStatus.danger < rfidInvalidList.length){
+                    $http.get("http://localhost/logisflash/index.php?status=3")
+                    .then(function(response) {
+                        console.log(response);
+                    });
+
+                    $scope.ledStatus.danger = rfidInvalidList.length;
+                }
+
                 return {"success":rfidMatchList, "invalid":rfidInvalidList, "fail":rfidNotMatchList};     
             }
 
@@ -159,6 +194,20 @@ class GateOutCtrl {
         console.log("Remove all rfidtmpout");
         Meteor.call('rfidtmpout.removeAll');  
     }   
+
+    
+    turnoffYellowLED(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost/logisflash/index.php?status=2", true);
+        xhttp.send();
+    }
+
+    turnoffRedLED(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost/logisflash/index.php?status=4", true);
+        xhttp.send();
+
+    }
     
 }
 
@@ -166,5 +215,5 @@ export default angular.module('gateOut', [
     angularMeteor
 ]).component('gateOut', {
     templateUrl: 'imports/components/gateOut/gateOut.html',
-    controller: ['$scope', GateOutCtrl]
+    controller: ['$scope','$http', GateOutCtrl]
 }); 

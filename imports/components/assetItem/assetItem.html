@@ -44,32 +44,41 @@
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> เพิ่ม ข้อมูล ส.ป.
                     </h3>
                 </div>
-                <div class="panel-body custom-height2">
+                <div class="panel-body custom-height4">
                      
                      <form name="newItemForm" class="form-horizontal text-center" ng-submit="$ctrl.addItem($ctrl.newItem)">
 
-                        <label class="control-label col-md-3" for="name">ชื่อครุภัณฑ์ :</label>
-                        <div class="col-md-9">
+                        <label class="control-label col-md-4" for="name">ชื่อครุภัณฑ์ :</label>
+                        <div class="col-md-8">
                             <p><input class="form-control" ng-model="$ctrl.newItem.name" type="text" id="name" placeholder="เช่น UM-01" required/></p>
                         </div>
 
-                        <label class="control-label col-md-3" for="number">หมายเลขครุภัณฑ์ :</label>
-                        <div class="col-md-9">
+                        <label class="control-label col-md-4" for="number">หมายเลขครุภัณฑ์ :</label>
+                        <div class="col-md-8">
                             <p><input class="form-control" ng-model="$ctrl.newItem.number" type="text" id="number" placeholder="เช่น 6135-XX-134-1267" required/></p>
                         </div>
 
-                        <label class="control-label col-md-3" for="price">ราคา :</label>
-                        <div class="col-md-9">
+                        <label class="control-label col-md-4" for="price">ราคา :</label>
+                        <div class="col-md-8">
                             <p><input class="form-control" ng-model="$ctrl.newItem.price" type="text" id="price" placeholder="เช่น 26 (บาท)" required/></p>
                         </div>
                         
-                        <label class="control-label col-md-3" for="description">รายละเอียด :</label>
-                        <div class="col-md-9">
+                        <label class="control-label col-md-4" for="description">รายละเอียด :</label>
+                        <div class="col-md-8">
                             <p><input class="form-control" ng-model="$ctrl.newItem.description" type="text" id="description" placeholder="เช่น SB-22/PT,TA-312/PT,TS-352/U,เครื่องตรวจท่นระเบิด  ( สป.เข้ามาปี 56 )" required/></p>
                         </div>
                         
                         <div class="col-md-12">
                             <p><input type="submit" ng-disabled="newItemForm.$invalid" class="btn btn-primary" value="บันทึก"></p>
+                        </div>
+
+                        <div class="col-md-12 text-left">
+                            <hr/>
+                            <p><h4><b>ตัวอย่าง</b></h4></p>
+                            <p><b>ชื่อครุภัณฑ์ </b> : fiber optic</p>
+                            <p><b>รายหมายเลขครุภัณฑ์ละเอียด</b> : 1000-0000-0000-2</p>            
+                            <p><b>ราคา</b> : 400000</p>          
+                            <p><b>รายละเอียด</b> : fiber optic ความยาว 4 กม. </p>          
                         </div>
 
                     </form>
